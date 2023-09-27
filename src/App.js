@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
 
 const messages = [
   "Learn React ⚛️",
@@ -28,25 +27,42 @@ const App = () => {
               <div className={step >= 3 && 'active'}>3</div>
             </div>
 
-            <div className="message">{`Step ${step} : ${messages[step-1]}`}</div>
+            <StepMessage step={step}><p>{messages[step-1]}</p></StepMessage>      
 
             <div className="buttons">
-              <button 
-              style={{backgroundColor: "#7950f2", color: "#fff"}}
-              onClick={() => {if (step > 1) setStep(step-1)}}>
-                <span>Previous</span>
-              </button>
-              <button 
-              style={{backgroundColor: "#7950f2", color: "#fff"}}
-              onClick={() => {if (step < 3) setStep(step+1)}}>
-                <span>Next</span>
-              </button>
+              <Button bgColor="#7950f2" color="#fff" 
+                onClick={() => {if (step > 1) setStep(step-1)}}>
+                  <span>👈</span> Previous
+                </Button>
+
+              <Button bgColor="#7950f2" color="#fff" 
+                onClick={() => {if (step < 3) setStep(step+1)}}>
+                  Next <span>👉</span>
+                </Button>        
             </div>
           </div>
         )
       }
     </>
   )
+}
+
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>{`Step ${step}`}</h3>
+      {children}
+    </div>
+  );
+}
+
+function Button({ bgColor, color, onClick, text, children }) {
+  return (
+    <button style={{backgroundColor: bgColor, color: color}} 
+      onClick={onClick}>
+      {children}
+    </button>
+  );
 }
 
 export default App
